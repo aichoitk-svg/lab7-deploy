@@ -1,0 +1,21 @@
+name: Auto Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lay code moi nhat
+        uses: actions/checkout@v4
+
+      - name: Day code len Hosting
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /htdocs/
